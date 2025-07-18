@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Socket</class>
+ <widget class="QWidget" name="Socket">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>646</width>
+    <height>495</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="8,1,1">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>수신 데이터</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pPBDelete">
+         <property name="text">
+          <string>수신 삭제</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pPBConnect">
+         <property name="text">
+          <string>서버 연결</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="pTERecvData"/>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,6,2">
+         <item>
+          <widget class="QLineEdit" name="pLEId"/>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="pLESend"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pPBSendToId">
+           <property name="text">
+            <string>송신</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pLEId</sender>
+   <signal>returnPressed()</signal>
+   <receiver>pPBSendToId</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>491</x>
+     <y>472</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>469</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

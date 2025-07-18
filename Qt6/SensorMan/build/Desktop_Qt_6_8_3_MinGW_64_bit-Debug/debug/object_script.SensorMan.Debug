@@ -1,0 +1,13 @@
+debug/keyboard.o
+debug/main.o
+debug/mainwidget.o
+debug/sensor.o
+debug/socket.o
+debug/socketclient.o
+debug/sqlite.o
+debug/moc_keyboard.o
+debug/moc_mainwidget.o
+debug/moc_sensor.o
+debug/moc_socket.o
+debug/moc_socketclient.o
+debug/moc_sqlite.o

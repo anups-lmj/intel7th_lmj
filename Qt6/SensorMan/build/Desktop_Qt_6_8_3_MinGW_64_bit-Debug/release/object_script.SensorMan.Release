@@ -1,0 +1,13 @@
+release/keyboard.o
+release/main.o
+release/mainwidget.o
+release/sensor.o
+release/socket.o
+release/socketclient.o
+release/sqlite.o
+release/moc_keyboard.o
+release/moc_mainwidget.o
+release/moc_sensor.o
+release/moc_socket.o
+release/moc_socketclient.o
+release/moc_sqlite.o
