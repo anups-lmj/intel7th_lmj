@@ -13,11 +13,9 @@ Tab5SensorDatabase::Tab5SensorDatabase(QWidget *parent)
     else
         qDebug() << "Fail DB Connection";
     QString strQuery = "create table sensor_tb ("
-                       "name varchar(10),"
-                       "date DATETIME primary key,"
-                       "illu varchar(10),"
-                       "temp float(10),"
-                       "humi float(10))";
+                        "name varchar(10),"
+                        "date DATETIME primary key,"
+                        "illu varchar(10))";
     QSqlQuery sqlQuery;
     if(sqlQuery.exec(strQuery))
         qDebug() << "Create Table";
@@ -25,10 +23,6 @@ Tab5SensorDatabase::Tab5SensorDatabase(QWidget *parent)
 
     illuLine = new QLineSeries(this);
     illuLine->setName("조도");
-    tempLine = new QLineSeries(this);
-    tempLine->setName("온도");
-    humiLine = new QLineSeries(this);
-    humiLine->setName("습도");
 
     QPen pen;
     pen.setWidth(2);
@@ -37,17 +31,8 @@ Tab5SensorDatabase::Tab5SensorDatabase(QWidget *parent)
     pen.setJoinStyle(Qt::MiterJoin);
     illuLine->setPen(pen);
 
-    pen.setBrush(Qt::green);
-    tempLine->setPen(pen);
-
-    pen.setBrush(Qt::blue);
-    humiLine->setPen(pen);
-
-
     pQChart = new QChart();
     pQChart->addSeries(illuLine);
-    pQChart->addSeries(tempLine);
-    pQChart->addSeries(humiLine);
     pQChart->createDefaultAxes();
     pQChart->axes(Qt::Vertical).constFirst()->setRange(0, 100);
 
@@ -61,8 +46,6 @@ Tab5SensorDatabase::Tab5SensorDatabase(QWidget *parent)
 
     updateLastDateTime(0);
     pQChartView->chart()->setAxisX(pQDateTimeAxisX,illuLine);
-    pQChartView->chart()->setAxisX(pQDateTimeAxisX,tempLine);
-    pQChartView->chart()->setAxisX(pQDateTimeAxisX,humiLine);
 
 }
 
@@ -88,12 +71,10 @@ void Tab5SensorDatabase::tab5RecvDataSlot(QString recvData)
     QStringList strList = recvData.split("@");   //recvData : [SENSIRID]SENSOR@조도@온도@습도
     QString name = strList[1];
     QString illu  = strList[3];     //조도
-    QString temp = strList[4];
-    QString humi = strList[5];
 //    illuLine->append(dateTime.toMSecsSinceEpoch(),illu.toInt());
-   //qDebug() << illu ;
+    qDebug() << illu ;
 
-    QString strQuery = "insert into sensor_tb(name, date, illu, temp, humi) values('" + name + "', '" + dateTime.toString("yyyy/MM/dd hh:mm:ss") + "' , '" + illu + "' , '" + temp + "' , '" + humi + "')";
+    QString strQuery = "insert into sensor_tb(name, date, illu) values('" + name + "', '" + dateTime.toString("yyyy/MM/dd hh:mm:ss") + "' , '" + illu +"')";
     QSqlQuery sqlQuery;
     if(sqlQuery.exec(strQuery))
         qDebug() << "Insert Query Ok";
@@ -108,8 +89,6 @@ Tab5SensorDatabase::~Tab5SensorDatabase()
 void Tab5SensorDatabase::on_pPBClearChart_clicked()
 {
     illuLine->clear();
-    tempLine->clear();
-    humiLine->clear();
     updateLastDateTime(0);
 }
 
@@ -139,15 +118,15 @@ void Tab5SensorDatabase::on_pPBsearchDB_clicked()
             delete [] pQTableWidgetItemId;
             delete [] pQTableWidgetItemDate;
             delete [] pQTableWidgetItemIllu;
-            delete [] pQTableWidgetItemTemp;
-            delete [] pQTableWidgetItemHumi;
+
+            pQTableWidgetItemId = nullptr ;
+            pQTableWidgetItemDate = nullptr;
+            pQTableWidgetItemIllu = nullptr;
         }
 
         pQTableWidgetItemId = new QTableWidgetItem[rowCount];
         pQTableWidgetItemDate = new QTableWidgetItem[rowCount];
         pQTableWidgetItemIllu = new QTableWidgetItem[rowCount];
-        pQTableWidgetItemTemp = new QTableWidgetItem[rowCount];
-        pQTableWidgetItemHumi = new QTableWidgetItem[rowCount];
 
         rowCount=0;
         sqlQuery.first();
@@ -158,19 +137,13 @@ void Tab5SensorDatabase::on_pPBsearchDB_clicked()
             (pQTableWidgetItemId+rowCount)->setText(sqlQuery.value("name").toString());
             (pQTableWidgetItemDate+rowCount)->setText(sqlQuery.value("date").toString());
             (pQTableWidgetItemIllu+rowCount)->setText(sqlQuery.value("illu").toString());
-            (pQTableWidgetItemTemp+rowCount)->setText(sqlQuery.value("temp").toString());
-            (pQTableWidgetItemHumi+rowCount)->setText(sqlQuery.value("humi").toString());
 
             ui->pTBsensor->setItem(rowCount,0, (pQTableWidgetItemId+rowCount));
             ui->pTBsensor->setItem(rowCount,1, (pQTableWidgetItemDate+rowCount));
             ui->pTBsensor->setItem(rowCount,2, (pQTableWidgetItemIllu+rowCount));
-            ui->pTBsensor->setItem(rowCount,3, (pQTableWidgetItemTemp+rowCount));
-            ui->pTBsensor->setItem(rowCount,4, (pQTableWidgetItemHumi+rowCount));
 
             QDateTime xValue = QDateTime::fromString((pQTableWidgetItemDate+rowCount)->text(), "yyyy/MM/dd hh:mm:ss");
             illuLine->append(xValue.toMSecsSinceEpoch(),(pQTableWidgetItemIllu+rowCount)->text().toInt());
-            tempLine->append(xValue.toMSecsSinceEpoch(),(pQTableWidgetItemTemp+rowCount)->text().toFloat());
-            humiLine->append(xValue.toMSecsSinceEpoch(),(pQTableWidgetItemHumi+rowCount)->text().toFloat());
             rowCount++;
         }
         ui->pTBsensor->resizeColumnToContents(0);
@@ -192,10 +165,8 @@ void Tab5SensorDatabase::on_pPBdeleteDB_clicked()
     if(!sqlQuery.exec(strQuery))
         qDebug() << "Delete Query Ok";
 \
-//  ui->pTBsensor->clearContents();
+//    ui->pTBsensor->clearContents();
     illuLine->clear();
-    tempLine->clear();
-    humiLine->clear();
 }
 
 void Tab5SensorDatabase::updateLastDateTimeSql(bool bFlag)

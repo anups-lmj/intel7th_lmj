@@ -21,7 +21,13 @@ MainWidget::MainWidget(QWidget *parent)
     pTab5SensorDatabase = new Tab5SensorDatabase(ui->pTab5);
     ui->pTab5->setLayout(pTab5SensorDatabase->layout());
 
-    ui->pTabWidget->setCurrentIndex(4);
+    pTab6WebCamera = new Tab6WebCamera(ui->pTab6);
+    ui->pTab6->setLayout(pTab6WebCamera->layout());
+
+    pTab7CamOpencv = new Tab7CamOpencv(ui->pTab7);
+    ui->pTab7->setLayout(pTab7CamOpencv->layout());
+
+    ui->pTabWidget->setCurrentIndex(6);
 
     connect(pTab2SocketClient, SIGNAL(ledWriteSig(int)), pTab1DevControl->getpDial(), SLOT(setValue(int)));
     connect(pTab1DevControl->getpLedKeyDev(), SIGNAL(updateKeyDataSig(int)), pTab2SocketClient, SLOT(socketSendToLinux(int)));
@@ -29,6 +35,7 @@ MainWidget::MainWidget(QWidget *parent)
     connect(pTab2SocketClient, SIGNAL(tab3RecvDataSig(QString)), pTab3ControlPannel, SLOT(tab3RecvDataSlot(QString)));
     connect(pTab2SocketClient, SIGNAL(tab4RecvDataSig(QString)), pTab4SensorChart, SLOT(tab4RecvDataSlot(QString)));
     connect(pTab2SocketClient, SIGNAL(tab5RecvDataSig(QString)), pTab5SensorDatabase, SLOT(tab5RecvDataSlot(QString)));
+    connect(pTab7CamOpencv->getpWebCamThread(), SIGNAL(socketSendDataSig(QString)), pTab2SocketClient->getpSocketClient(), SLOT(socketWriteDataSlot(QString)));
 }
 
 MainWidget::~MainWidget()

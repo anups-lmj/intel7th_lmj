@@ -6,21 +6,15 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDateTime>
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-    #include <QChartView>
-    #include <QLineSeries>
-    #include <QDateTimeAxis>
-    #include <QValueAxis>
-#else
-    #include <QtCharts/QChartView>
-    #include <QtCharts/QChart>
-    #include <QtCharts/QLineSeries>
-    #include <QtCharts/QDateTimeAxis>
-    #include <QtCharts/QValueAxis>
-    QT_CHARTS_USE_NAMESPACE
-#endif
+#include <QChartView>
+#include <QLineSeries>
+#include <QDateTimeAxis>
+#include <QValueAxis>
 #include <QTableWidgetItem>
 #include <QDebug>
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+    QT_CHARTS_USE_NAMESPACE
+#endif
 
 namespace Ui {
 class Tab5SensorDatabase;
@@ -38,8 +32,6 @@ private:
     Ui::Tab5SensorDatabase *ui;
     QSqlDatabase qSqlDatabase;
     QLineSeries *illuLine;
-    QLineSeries *tempLine;
-    QLineSeries *humiLine;
     QChart *pQChart;
     QChartView *pQChartView;
     QDateTimeAxis *pQDateTimeAxisX;
@@ -50,8 +42,6 @@ private:
     QTableWidgetItem* pQTableWidgetItemId = nullptr;
     QTableWidgetItem* pQTableWidgetItemDate = nullptr;
     QTableWidgetItem* pQTableWidgetItemIllu = nullptr;
-    QTableWidgetItem* pQTableWidgetItemTemp = nullptr;
-    QTableWidgetItem* pQTableWidgetItemHumi = nullptr;
 
     void updateLastDateTime(bool);
     void updateLastDateTimeSql(bool);

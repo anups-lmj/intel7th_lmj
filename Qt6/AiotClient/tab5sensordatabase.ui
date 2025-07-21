@@ -86,16 +86,6 @@
          <string>조도</string>
         </property>
        </column>
-       <column>
-        <property name="text">
-         <string>온도</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>습도</string>
-        </property>
-       </column>
       </widget>
      </item>
      <item>
