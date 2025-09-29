@@ -1,1 +1,0 @@
-Add Arduino and Qt6 projects.

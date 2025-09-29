@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;ADC1_ch0_ch1_interrupt2_continuesMode/ADC1_ch0_ch1_interrupt.ioc&apos; to &apos;ADC1_ch0_ch1_interrupt_continuesMode.ioc&apos;" description="Rename resource &apos;ADC1_ch0_ch1_interrupt.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="ADC1_ch0_ch1_interrupt.ioc" name="ADC1_ch0_ch1_interrupt_continuesMode.ioc" stamp="1748576837206" updateReferences="true"/>
+</session>
