@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;Exti_LedKey_modul_handler/Exti_LedKey_modul.ioc&apos; to &apos;Exti_LedKey_modul_handler.ioc&apos;" description="Rename resource &apos;Exti_LedKey_modul.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Exti_LedKey_modul.ioc" name="Exti_LedKey_modul_handler.ioc" stamp="1748240337751" updateReferences="true"/>
-</session>
