@@ -11,6 +11,11 @@
 [스마트 수경재배 시스템](https://github.com/anups-lmj/intel_miniProject)
 - 본 프로젝트에서는 가정용 스마트 수경재배기를 제작하여 자동화, 데이터 수집, 모바일 제어 기능을 구현하였습니다.
 
+[스쿨존 위험감지 자율주행 시뮬레이션](https://github.com/whdtjr/autonomous-driving-project)
+- 이 프로젝트는 스쿨존 내 위험상황을 실시간으로 감지하는 자율주행 시뮬레이션 시스템입니다.
+Jetson Orin Nano에서 YOLOv8 모델을 구동해 어린이·차량·사고 위험요소를 탐지하고, ROS2를 통해 자율주행 노드로 경고 메시지를 전송합니다.
+Qt 기반 GUI에서 영상·탐지 결과·LED 신호를 통합 시각화하여 AI 인지–통신–표시가 결합된 엣지 자율주행 환경을 구현했습니다
+
 ## Pratice
 
 - [Raspberry Pi](./raspberry-pi4/)
